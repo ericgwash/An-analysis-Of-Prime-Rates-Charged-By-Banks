@@ -1,0 +1,133 @@
+
+\documentclass[12pt, a4paper]{report}
+\usepackage[english]{babel}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage{float, graphicx}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+
+
+\begin{document}
+\setcounter{page}{1}
+\setlength{\parindent}{0pt} 
+\pagenumbering{roman}
+
+
+\title{An analysis Of Prime Rates Charged By Banks}
+\author{Eric Cheruiyot- I07/81378/2017\\
+
+Elvin Matovu- I07/102739/2017\\
+
+Shaffy Achayo Musumba- I07/101064/2017\\
+
+Abdulaziz Abdullahi Sharif- I07/104049/2017\\
+
+Mohamed Abdirahman Galore- I07/81360/2017\\}
+\date{}
+\vspace{5cm}
+\maketitle
+\newpage
+\section{Introduction}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+The term 'prime rate' (also known as the prime lending rate or prime interest rate) refers to the interest rate that large commercial banks charge on loans and products held by their customers with the highest credit rating. Typically, the customers with high creditworthiness are large corporations that are borrowing from commercial banks in order to finance their operations with debt.Studying the prime rates is important since it acts as an economic performance indicator and it also affects other types of interest rates offered by banks.
+
+This paper aims to analyse the behavior of the prime lending rate and forecast future rates from availabe historical data.The data used is historical average prime rates from 1956-2015 USA.AMPR stands for Average majority prime rate charged by banks.
+\section{Literature review}
+Researchers have observed that banks respond quickly to changes in monetary policy by  increasing their loan rates  faster during tightening cycles than reducing when monetary policy is eased\citep{neumark1992market}.Banks act fast by lowering deposit rates during relaxing cycles compared to policy tightening cycles, where the deposit rates are slowly raised \citep{neumark1992market,hutchison1995retail}.
+
+Prime rate persistence plays a role in determining the current or a future rate from the previous rate.Persistence in the prime lending rate, especially during policy easing cycles where market lending rates would be slow in adjusting downwards, will continue to be a phenomenon as long as it does not lead to loss of competitiveness of the respective banks. However, data reflects that the adjustment takes place gradually, although may not be fully \citep{perera2018analysis}
+
+
+
+\section{Methodology}
+As stated the report is on a study of behaviour and forecasting  of prime lending rates by banks year after year.The data used is the average prime rates of USA banks form 1956 to 2015.
+\begin{enumerate}
+\item [(i)] 
+Descriptive statistics, namely, mean, median, standard deviation, maximum and minimum of time series data to identify the properties of the dataset.
+For the descriptive statistics we used the summary and sapply functions in R .
+\item [(ii)] The data was converted to time series and plotted.
+\item [(iii)].The Augmented dicky-fuller test was used to test for stationarity.
+\item [(iv)]Correlation tests were carried out to identify any statistical relationships among the above variables.
+The ACF plot was useful in determining stationarity.The ACF and PACF plots were used to decide whether to include an AR term(s), MA term(s), or both. 
+\item [(v)]The arima model selected was by use of the "auto.arima" function in R.
+The forecast was then done on the arima model using the forecast package and the forecast function in R.
+\item [(vi)]The Ljung-Box test was used to check accuracy and suitability of our model and forecast.
+\end{enumerate}
+
+\section{Results and Discussions}
+
+The dataset has 60 time periods and yearly data with a frequncy of 1.We converted it to time series data and plotted the graph.Then we used the summary function to get descriptive statistics of the data in R.
+
+
+Mean=7.128 \\
+Median=6.835\\
+Maximum=18.870\\
+Minimum=3.250\\
+Standard Deviation=3.264341\\
+
+\begin{center}
+\includegraphics{rplot03}
+\end{center}
+The data has no strong trend and seasonality hence no need for de-trending and differencing.
+
+The time series was tested for stationarity using the ADF test.
+
+
+Augmented Dickey-Fuller Test
+
+data:  usa\\
+
+Dickey-Fuller = -1.7754, Lag order = 3, p-value = 0.6655\\
+
+alternative hypothesis: stationary\\
+
+
+From the ADF test we conclude the time series is stationary.There was no differencing required.
+The autocorrelation plots were as shown below.
+\begin{center}
+\includegraphics{rplot04}
+\end{center}
+\begin{center}
+\includegraphics{rplot05}
+\end{center}
+Our time series was fitted to an ARIMA (0,1,2) model using the R function auto.arima and forecasted ahead 10 years using the R package forecast and plotted.
+\begin{center}
+\includegraphics{rplot07}
+\end{center}
+The 10 year forecast shows a levelling-off of the Average majority prime rate charged by banks where the rate remains relatively level.The residuals of the model were obtained and plotted after a summary of the model was done.
+
+	Ljung-Box test
+
+data:  Residuals from ARIMA(0,1,2)
+Q* = 9.8527, df = 8, p-value = 0.2755
+
+Model df: 2.   Total lags used: 10
+
+\begin{center}
+\includegraphics{rplot08}
+\end{center}
+The p-value for the Ljung-Box test is 0.2755, indicating that there is little evidence for non-zero autocorrelations in the forecast errors for lags 1-10 therefore.The residuals plot shows that the variance of the forecast errors is roughly constant over time. The histogram of the time series shows that the forecast errors are roughly normally distributed and the mean seems to be close to zero.
+
+Therefore, it is plausible that the forecast errors are normally distributed with mean zero and constant variance.Since successive forecast errors do not seem to be correlated, and the forecast errors seem to be normally distributed with mean zero and constant variance, the ARIMA(0,1,2) does seem to provide an adequate predictive model for the average majority prime rate charged by banks.
+\section{Conclusions}
+This paper analyses the behaviour of prime rates in the US with a keen interest for investigating prime rate persistence.We seek to establish whether prime rates adjust persistently year by year.
+
+
+From the 10 year forecast  we see there is prime rate persistence since the predicted rates are persistent with adjoining rates .
+Increased prime rate persistence is likely to be a partial causal factor for the asymmetric adjustment in the prime lending rate to changes in the monetary policy stance in the nation.
+Persistence in the prime lending rate, especially during policy easing cycles where market lending rates would be slow in adjusting downwards, will continue to be a phenomenon as long as it does not lead to loss of competitiveness of the respective banks. However, data reflects that the adjustment takes place gradually, although may not be fully as observed by \citet{perera2018analysis}.
+
+
+
+The Ljung-Box test confirms that our chosen model is accurate enough and suitable hence our forecast is acceptable.
+We therefore conclude that in the US from historical data available we see prime rate persistance and from our forecast we conclude that adjoining rates affect future rates though gradually.
+
+
+This study could however be extended over a larger period and more variables introduced since financial markets are prone to shifts both externally and internally meaning prime rates are subject to other market forces in the economy.The resulting model will be even more accurate in predicting the average majority prime rate charged by us banks.
+\newpage
+  \bibliography{myref}
+  \bibliographystyle{apalike}
+  
+\end{document}
